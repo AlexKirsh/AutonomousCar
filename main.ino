@@ -49,6 +49,11 @@ void setup() {
 
     //Setup bluetooth communication
     Serial1.begin(9600); //Tx1 and Rx1  //Connected to Bluetooth Module HC-05 (Bluetooth 2.0)
+	
+	//Setup LED indicator
+	
+	pinMode(2,OUTPUT);
+	pinMode(3,OUTPUT);
 
 }
 
@@ -75,11 +80,11 @@ void loop() {
         if (sonar_distance > 45) {
 
         //Jump start driving  
-          analogWrite(ENABLE_RM,100);
+          analogWrite(ENABLE_RM,110);
           digitalWrite(FORWARD_RM,HIGH);
           digitalWrite(BACKWARD_RM,LOW);
           
-          analogWrite(ENABLE_LM,100);
+          analogWrite(ENABLE_LM,110);
           digitalWrite(FORWARD_LM,HIGH);
           digitalWrite(BACKWARD_LM,LOW);
   
@@ -118,6 +123,10 @@ void loop() {
             
             digitalWrite(ENABLE_RM,LOW);
             digitalWrite(ENABLE_LM,LOW);
+			
+			//LED indicator ON
+			digitalWrite(2,LOW);
+			digitalWrite(3,HIGH);
 
             Serial1.print("SONAR:");
             for (int i = 0; i < sonar_index; i++) {
@@ -148,6 +157,9 @@ void loop() {
               Serial1.flush();
               while (Serial1.available() == 0);
             }
+			
+			//LED indicator OFF
+			digitalWrite(3,LOW);
             
           }
         }

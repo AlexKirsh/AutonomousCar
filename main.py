@@ -37,7 +37,7 @@ while True:
     if message[len(message) - 1] == '.':
         sensor_file.write(message)
         user_input = input("Proceed robot movement?")
-        if user_input == "n" in message:
+        if user_input == "n":
             sock.send("END")
             break
         else:
