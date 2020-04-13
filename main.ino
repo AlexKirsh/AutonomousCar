@@ -50,10 +50,13 @@ void setup() {
     //Setup bluetooth communication
     Serial1.begin(9600); //Tx1 and Rx1  //Connected to Bluetooth Module HC-05 (Bluetooth 2.0)
 	
+	Serial.begin(9600);
+	
 	//Setup LED indicator
 	
 	pinMode(2,OUTPUT);
 	pinMode(3,OUTPUT);
+	digitalWrite(2,LOW);
 
 }
 
@@ -65,9 +68,17 @@ void loop() {
     pc_msg = Serial1.readString();
     
     if (pc_msg == "START") {
+	  
+	  //Initialize timer parameters
+	  unsigned long strt_time;
+	  unsigned long stop_time;
+	  int timer_flag = 1;
 
       //Loop until PC closes connection
       while (pc_msg != "END") {
+		  
+		  //LED indicator ON
+		digitalWrite(3,HIGH);
 		  
 		sonar_distance = sonar_sensor.Distance();
 		delay(50);
@@ -77,72 +88,111 @@ void loop() {
         }
         
         //If no obstacle in sight, robot may drive
-        if (sonar_distance > 45) {
-
-        //Jump start driving  
-          analogWrite(ENABLE_RM,110);
-          digitalWrite(FORWARD_RM,HIGH);
-          digitalWrite(BACKWARD_RM,LOW);
-          
-          analogWrite(ENABLE_LM,110);
-          digitalWrite(FORWARD_LM,HIGH);
-          digitalWrite(BACKWARD_LM,LOW);
-  
-          delay(500);
+        if (sonar_distance >= 56) {
+			
+			// Measure starting time
+			if (timer_flag) {
+				strt_time = millis();
+				timer_flag = 0;
+			}
+			
+			//Jump start driving 
+		
+			analogWrite(ENABLE_RM,110);
+			digitalWrite(FORWARD_RM,HIGH);
+			digitalWrite(BACKWARD_RM,LOW);
+			
+			analogWrite(ENABLE_LM,110);
+			digitalWrite(FORWARD_LM,HIGH);
+			digitalWrite(BACKWARD_LM,LOW);
+	  
+			delay(500);
+			
+			//Drive robot forward
+			analogWrite(ENABLE_RM,80);
+			digitalWrite(FORWARD_RM,HIGH);
+			digitalWrite(BACKWARD_RM,LOW);
+			
+			analogWrite(ENABLE_LM,40);
+			digitalWrite(FORWARD_LM,HIGH);
+			digitalWrite(BACKWARD_LM,LOW);
           
         }
+		
+		//LED indicator OFF
+	
+		digitalWrite(3,LOW);
 
-        while (sonar_distance > 45) {
+        while (sonar_distance >= 56) {
+			
+		//LED indicator ON
+		digitalWrite(3,HIGH);
+
       
-          //Collect sensor data
-          sonar_distance = sonar_sensor.Distance();
-          ir_distance = ir_sensor.distance();
+		//Collect sensor data
+        sonar_distance = sonar_sensor.Distance();
+        ir_distance = ir_sensor.distance();
+		
+		Serial.println("SONAR:");
+		Serial.print(sonar_distance);
+		Serial.println("IR:");
+		Serial.print(ir_distance);
 
-          //Save sensor data
-          if (sonar_index < 1000 && ir_index < 1000) {
+
+        //Save sensor data
+        if (sonar_index < 1000 && ir_index < 1000) {
             sonar_readings[sonar_index] = sonar_distance;
             sonar_index++;
             ir_readings[ir_index] = ir_distance;
             ir_index++;
           }
-          
-          //Drive robot forward
-          analogWrite(ENABLE_RM,80);
-          digitalWrite(FORWARD_RM,HIGH);
-          digitalWrite(BACKWARD_RM,LOW);
-        
-          analogWrite(ENABLE_LM,40);
-          digitalWrite(FORWARD_LM,HIGH);
-          digitalWrite(BACKWARD_LM,LOW);
 
-          delay(50);
+		//LED indicator OFF
+		digitalWrite(3,LOW);
   
-          //If obstacle present, stop robot and send sensor data to PC
+		delay(50);
+		
+		digitalWrite(3,HIGH);
+		
+		if (sonar_distance == 0) {
+			digitalWrite(3,HIGH);
+		}
+		  
+        //If obstacle present, stop robot and send sensor data to PC
           
-          if (sonar_distance < 45 && sonar_distance > 0) {
+        if (sonar_distance <= 56) {
             
-            digitalWrite(ENABLE_RM,LOW);
+			//LED indicator ON
+			digitalWrite(3,HIGH);
+			
+			digitalWrite(ENABLE_RM,LOW);
             digitalWrite(ENABLE_LM,LOW);
 			
-			//LED indicator ON
-			digitalWrite(2,LOW);
-			digitalWrite(3,HIGH);
-
+			// Measure stop time
+			stop_time = millis();
+			timer_flag = 1;
+			
             Serial1.print("SONAR:");
             for (int i = 0; i < sonar_index; i++) {
               Serial1.print(sonar_readings[i]);
               Serial1.print(","); 
-              sonar_readings[i] = 0;
+              sonar_readings[i] = -1;
             }
+			sonar_index = 0;
             Serial1.print(";");
             
             Serial1.print("IR:");
             for (int i = 0; i < ir_index; i++) {
               Serial1.print(ir_readings[i]);
               Serial1.print(","); 
-              ir_readings[i] = 0;
+              ir_readings[i] = -1;
             }
+			ir_index = 0;
             Serial1.print(";");
+			
+			Serial1.print("TIME:");
+			Serial1.print(stop_time - strt_time);
+			Serial1.print(";");
 			
             Serial1.print("END.");
             Serial1.flush();
@@ -164,6 +214,16 @@ void loop() {
           }
         }
       }
+	  
+	  //LED indicator ON
+		digitalWrite(2,HIGH);
+		digitalWrite(3,LOW);
+		delay(10);
+		digitalWrite(2,LOW);
+		digitalWrite(3,LOW);
+		delay(10);
+		digitalWrite(2,HIGH);
+		digitalWrite(3,LOW);
     }
   }
 }
