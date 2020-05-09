@@ -8760,8 +8760,8 @@ Divider</text>
 <attribute name="VALUE" x="-35.56" y="25.4" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="VCC" x="-35.56" y="27.94" size="1.778" layer="96" display="both"/>
 </instance>
-<instance part="LED1" gate="G$1" x="38.1" y="-7.62" smashed="yes">
-<attribute name="NAME" x="41.656" y="-12.192" size="1.778" layer="95" rot="R90"/>
+<instance part="LED1" gate="G$1" x="38.1" y="-5.08" smashed="yes">
+<attribute name="NAME" x="41.656" y="-9.652" size="1.778" layer="95" rot="R90"/>
 </instance>
 <instance part="RE1" gate="G$1" x="20.32" y="83.82" smashed="yes">
 <attribute name="NAME" x="22.86" y="73.66" size="1.27" layer="95"/>
@@ -9061,29 +9061,31 @@ Divider</text>
 <wire x1="48.26" y1="-27.94" x2="24.13" y2="-27.94" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$18" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="3"/>
-<pinref part="LED1" gate="G$1" pin="A"/>
-<wire x1="24.13" y1="-5.08" x2="38.1" y2="-5.08" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="U$1" gate="G$1" pin="2"/>
-<wire x1="24.13" y1="-7.62" x2="33.02" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="33.02" y1="-7.62" x2="33.02" y2="-12.7" width="0.1524" layer="91"/>
-<pinref part="LED1" gate="G$1" pin="C"/>
-<wire x1="33.02" y1="-12.7" x2="38.1" y2="-12.7" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$22" class="0">
 <segment>
 <pinref part="RE1" gate="G$1" pin="A"/>
 <wire x1="33.02" y1="86.36" x2="45.72" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="86.36" x2="45.72" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="86.36" x2="45.72" y2="-12.7" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="-12.7" x2="30.48" y2="-12.7" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="-12.7" x2="30.48" y2="-7.62" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="2"/>
+<wire x1="30.48" y1="-7.62" x2="24.13" y2="-7.62" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$18" class="0">
+<segment>
+<pinref part="LED1" gate="G$1" pin="A"/>
 <pinref part="U$1" gate="G$1" pin="4"/>
-<wire x1="45.72" y1="-2.54" x2="24.13" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="-2.54" x2="24.13" y2="-2.54" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="LED1" gate="G$1" pin="C"/>
+<wire x1="38.1" y1="-10.16" x2="33.02" y2="-10.16" width="0.1524" layer="91"/>
+<wire x1="33.02" y1="-10.16" x2="33.02" y2="-5.08" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="3"/>
+<wire x1="33.02" y1="-5.08" x2="24.13" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

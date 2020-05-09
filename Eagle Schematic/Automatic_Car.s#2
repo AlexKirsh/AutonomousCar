@@ -8478,108 +8478,6 @@ Source: http://catalog.osram-os.com .. LA_LR_LS_LY_P47F_Pb_free.pdf</description
 </deviceset>
 </devicesets>
 </library>
-<library name="rotary-encoder">
-<packages>
-<package name="62P">
-<wire x1="-8.32" y1="-7.935" x2="8.32" y2="-7.935" width="0.127" layer="21"/>
-<wire x1="8.32" y1="-7.935" x2="8.32" y2="7.935" width="0.127" layer="21"/>
-<wire x1="8.32" y1="7.935" x2="-8.32" y2="7.935" width="0.127" layer="21"/>
-<wire x1="-8.32" y1="7.935" x2="-8.32" y2="-7.935" width="0.127" layer="21"/>
-<wire x1="-6.35" y1="8.255" x2="-6.35" y2="9.525" width="0.127" layer="51"/>
-<wire x1="-6.35" y1="9.525" x2="-3.81" y2="9.525" width="0.127" layer="51"/>
-<wire x1="-3.81" y1="9.525" x2="-3.81" y2="8.255" width="0.127" layer="51"/>
-<wire x1="-1.27" y1="8.255" x2="-1.27" y2="9.525" width="0.127" layer="51"/>
-<wire x1="-1.27" y1="9.525" x2="1.27" y2="9.525" width="0.127" layer="51"/>
-<wire x1="1.27" y1="9.525" x2="1.27" y2="8.255" width="0.127" layer="51"/>
-<wire x1="3.81" y1="8.255" x2="3.81" y2="9.525" width="0.127" layer="51"/>
-<wire x1="3.81" y1="9.525" x2="6.35" y2="9.525" width="0.127" layer="51"/>
-<wire x1="6.35" y1="9.525" x2="6.35" y2="8.255" width="0.127" layer="51"/>
-<wire x1="0.635" y1="-8.255" x2="0.635" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="0.635" y1="-9.525" x2="1.905" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="1.905" y1="-9.525" x2="1.905" y2="-8.255" width="0.127" layer="51"/>
-<wire x1="3.175" y1="-8.255" x2="3.175" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="3.175" y1="-9.525" x2="4.445" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="4.445" y1="-9.525" x2="4.445" y2="-8.255" width="0.127" layer="51"/>
-<wire x1="5.715" y1="-8.255" x2="5.715" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="5.715" y1="-9.525" x2="6.985" y2="-9.525" width="0.127" layer="51"/>
-<wire x1="6.985" y1="-9.525" x2="6.985" y2="-8.255" width="0.127" layer="51"/>
-<circle x="0" y="0" radius="2.38" width="0.127" layer="21"/>
-<circle x="0" y="0" radius="4.76" width="0.127" layer="21"/>
-<pad name="1" x="6.35" y="-10.24" drill="0.8"/>
-<pad name="2" x="3.81" y="-10.24" drill="0.8"/>
-<pad name="3" x="1.27" y="-10.24" drill="0.8"/>
-<pad name="4" x="5.08" y="10.24" drill="0.8"/>
-<pad name="5" x="0" y="10.24" drill="0.8"/>
-<pad name="6" x="-5.08" y="10.24" drill="0.8"/>
-<pad name="M1" x="-8.68" y="5.27" drill="2.1" shape="square"/>
-<pad name="M2" x="-8.68" y="-5.27" drill="2.1" shape="square"/>
-<pad name="M3" x="8.68" y="-5.27" drill="2.1" shape="square"/>
-<pad name="M4" x="8.68" y="5.27" drill="2.1" shape="square"/>
-<text x="-7.62" y="-10.16" size="1.27" layer="25">&gt;NAME</text>
-<text x="-3.81" y="-6.985" size="1.27" layer="27">&gt;VALUE</text>
-</package>
-</packages>
-<symbols>
-<symbol name="62P22">
-<wire x1="7.62" y1="-7.62" x2="0" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="0" y1="-7.62" x2="-7.62" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-7.62" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="7.62" y1="7.62" x2="7.62" y2="2.54" width="0.254" layer="94"/>
-<wire x1="7.62" y1="2.54" x2="7.62" y2="-2.54" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-2.54" x2="7.62" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="7.62" y2="2.54" width="0.127" layer="94"/>
-<wire x1="7.62" y1="-2.54" x2="-1.27" y2="-2.54" width="0.127" layer="94"/>
-<wire x1="0" y1="3.81" x2="0" y2="5.715" width="0.127" layer="94"/>
-<wire x1="0" y1="5.715" x2="2.54" y2="5.715" width="0.127" layer="94"/>
-<wire x1="2.54" y1="5.715" x2="2.54" y2="3.81" width="0.127" layer="94"/>
-<wire x1="2.54" y1="3.81" x2="5.08" y2="3.81" width="0.127" layer="94"/>
-<wire x1="5.08" y1="3.81" x2="5.08" y2="5.715" width="0.127" layer="94"/>
-<wire x1="5.08" y1="5.715" x2="6.35" y2="5.715" width="0.127" layer="94"/>
-<wire x1="0" y1="-1.27" x2="1.27" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="1.27" y1="-1.27" x2="1.27" y2="0.635" width="0.127" layer="94"/>
-<wire x1="1.27" y1="0.635" x2="3.81" y2="0.635" width="0.127" layer="94"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="3.81" y1="-1.27" x2="6.35" y2="-1.27" width="0.127" layer="94"/>
-<wire x1="6.35" y1="-1.27" x2="6.35" y2="0.635" width="0.127" layer="94"/>
-<wire x1="-6.35" y1="1.905" x2="-5.08" y2="-2.54" width="0.127" layer="94" curve="-211.890792"/>
-<wire x1="-3.81" y1="-1.27" x2="-5.08" y2="-2.54" width="0.127" layer="94"/>
-<wire x1="-5.08" y1="-2.54" x2="-3.81" y2="-3.175" width="0.127" layer="94"/>
-<wire x1="0" y1="-10.16" x2="0" y2="-7.62" width="0.254" layer="94"/>
-<text x="2.54" y="-10.16" size="1.27" layer="95">&gt;NAME</text>
-<text x="8.89" y="-6.35" size="1.27" layer="96">&gt;VALUE</text>
-<pin name="A" x="12.7" y="2.54" length="middle" rot="R180"/>
-<pin name="B" x="12.7" y="-2.54" length="middle" rot="R180"/>
-<pin name="GND" x="0" y="-12.7" length="short" direction="sup" rot="R90"/>
-<pin name="V+" x="0" y="12.7" length="middle" direction="sup" rot="R270"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="62P*0" prefix="RE">
-<gates>
-<gate name="G$1" symbol="62P22" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="62P">
-<connects>
-<connect gate="G$1" pin="A" pad="4"/>
-<connect gate="G$1" pin="B" pad="3"/>
-<connect gate="G$1" pin="GND" pad="2"/>
-<connect gate="G$1" pin="V+" pad="1"/>
-</connects>
-<technologies>
-<technology name="16-H"/>
-<technology name="16-L"/>
-<technology name="16-N"/>
-<technology name="22-H"/>
-<technology name="22-L"/>
-<technology name="22-N"/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -8655,11 +8553,6 @@ Source: http://catalog.osram-os.com .. LA_LR_LS_LY_P47F_Pb_free.pdf</description
 <attribute name="VCC" value="3.3V"/>
 </part>
 <part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="*P4" device="-BOTTOM" package3d_urn="urn:adsk.eagle:package:15878/1" technology="LA"/>
-<part name="RE1" library="rotary-encoder" deviceset="62P*0" device="" technology="16-H"/>
-<part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device="">
-<attribute name="VCC" value="5V"/>
-</part>
-<part name="SUPPLY9" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -8763,17 +8656,6 @@ Divider</text>
 <instance part="LED1" gate="G$1" x="38.1" y="-7.62" smashed="yes">
 <attribute name="NAME" x="41.656" y="-12.192" size="1.778" layer="95" rot="R90"/>
 </instance>
-<instance part="RE1" gate="G$1" x="20.32" y="83.82" smashed="yes">
-<attribute name="NAME" x="22.86" y="73.66" size="1.27" layer="95"/>
-<attribute name="VALUE" x="29.21" y="77.47" size="1.27" layer="96"/>
-</instance>
-<instance part="P+7" gate="VCC" x="27.94" y="96.52" smashed="yes" rot="R180">
-<attribute name="VALUE" x="30.48" y="99.06" size="1.778" layer="96" rot="R270" display="off"/>
-<attribute name="VCC" x="33.02" y="96.52" size="1.778" layer="96" rot="R180" display="both"/>
-</instance>
-<instance part="SUPPLY9" gate="GND" x="20.32" y="68.58" smashed="yes">
-<attribute name="VALUE" x="18.415" y="65.405" size="1.778" layer="96"/>
-</instance>
 </instances>
 <busses>
 </busses>
@@ -8829,10 +8711,6 @@ Divider</text>
 <wire x1="-24.13" y1="10.16" x2="-38.1" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="-38.1" y1="10.16" x2="-38.1" y2="7.62" width="0.1524" layer="91"/>
 <junction x="-38.1" y="7.62"/>
-</segment>
-<segment>
-<pinref part="SUPPLY9" gate="GND" pin="GND"/>
-<pinref part="RE1" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -8981,13 +8859,6 @@ Divider</text>
 <wire x1="-24.13" y1="12.7" x2="-38.1" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="-38.1" y1="12.7" x2="-38.1" y2="17.78" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="P+7" gate="VCC" pin="VCC"/>
-<wire x1="27.94" y1="99.06" x2="27.94" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="27.94" y1="101.6" x2="20.32" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="RE1" gate="G$1" pin="V+"/>
-<wire x1="20.32" y1="101.6" x2="20.32" y2="96.52" width="0.1524" layer="91"/>
-</segment>
 </net>
 <net name="N$12" class="0">
 <segment>
@@ -9075,15 +8946,6 @@ Divider</text>
 <wire x1="33.02" y1="-7.62" x2="33.02" y2="-12.7" width="0.1524" layer="91"/>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <wire x1="33.02" y1="-12.7" x2="38.1" y2="-12.7" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$22" class="0">
-<segment>
-<pinref part="RE1" gate="G$1" pin="A"/>
-<wire x1="33.02" y1="86.36" x2="45.72" y2="86.36" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="86.36" x2="45.72" y2="-2.54" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="4"/>
-<wire x1="45.72" y1="-2.54" x2="24.13" y2="-2.54" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

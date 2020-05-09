@@ -6,8 +6,8 @@ from room_map import *
 
 
 ############## Functions
-# Parse data from IR sensors
-def parse_sensor_data(raw_data):
+# Parse data from IR sensor
+def parse_ir_data(raw_data):
     parsed_data = raw_data.split(";")[1]
     parsed_data = parsed_data.split(",")
     first_reading = int(parsed_data[0][3:])
@@ -17,12 +17,29 @@ def parse_sensor_data(raw_data):
     return parsed_data
 
 
-# Get drive time
-def get_drive_time(raw_data):
+# Parse data from Sonar sensor(last reading)
+def parse_sonar_data(raw_data):
+    parsed_data = raw_data.split(";")[0]
+    parsed_data = parsed_data.split(",")
+    parsed_data = parsed_data[-2:-1]
+    parsed_data = list(map(int, parsed_data))
+    return parsed_data[0]
+
+
+# Get drive distance
+def get_drive_distance(raw_data):
     parsed_data = raw_data.split(";")[2]
-    parsed_data = int(parsed_data[5:]) / 1000
+    parsed_data = float(parsed_data[9:])
     return parsed_data
 
+
+def record_drive_data(message, room_map_mat, strt_loc, drive_direction):
+    ir_data = parse_ir_data(message)
+    sonar_data = parse_sonar_data(message)
+    distance = get_drive_distance(message)
+    print(distance)
+    room_map_mat = populate_map_points(room_map_mat, ir_data, sonar_data, strt_loc, distance, drive_direction)
+    return room_map_mat
 
 ############## Program stats here
 # Create Bluetooth socket
@@ -55,29 +72,27 @@ sensor_file = open("C:\\Users\\Alexey\\Documents\\Arduino\\Autonomous Car Projec
 room_map_mat = np.zeros((300, 500))
 strt_loc = (250, 15)  # Left bottom point of matrix as shown using imshow
 
-# Robot speed in [cm/s]
-v = 46.66
-
 drive_direction = 1  # 1 for forward 0 for backwards (in respect to the initial position)
 
 while True:
     data = sock.recv(1024)
     decoded_data = data.decode('utf-8')
     message += decoded_data
-    if message[len(message) - 1] == '.':
+    if message[len(message) - 1] == '|':
         sensor_file.write(message)
-        ir_data = parse_sensor_data(message)
-        t = get_drive_time(message)
-        print(v*t)
-        room_map_mat = populate_map_points(room_map_mat, ir_data, strt_loc, v*t, drive_direction)
-        drive_direction = 1 - drive_direction  # Flip the direction of the next drive
+        record_drive_data(message, room_map_mat, strt_loc, drive_direction)
         user_input = input("Proceed robot movement?")
         if user_input == "n":
             sock.send("END")
             break
         else:
-            sock.send("ACK")
+            if drive_direction == 1:
+                sock.send("L")
+            else:
+                sock.send("R")
         message = ""
+
+        drive_direction = 1 - drive_direction  # Flip the direction of the next drive
 
 sensor_file.close()
 
