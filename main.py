@@ -80,7 +80,7 @@ while True:
     message += decoded_data
     if message[len(message) - 1] == '|':
         sensor_file.write(message)
-        record_drive_data(message, room_map_mat, strt_loc, drive_direction)
+        #record_drive_data(message, room_map_mat, strt_loc, drive_direction)
         user_input = input("Proceed robot movement?")
         if user_input == "n":
             sock.send("END")
