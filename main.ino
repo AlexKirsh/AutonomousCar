@@ -35,6 +35,7 @@ uint8_t lmotor_pwm = 130;
 #define ENCODER 2
 
 //MPU6050 init (accelerometer and gyroscope)
+#include "Wire.h"
 #include <MPU6050_light.h>
 MPU6050 mpu(Wire);
 
@@ -42,7 +43,7 @@ MPU6050 mpu(Wire);
 // The distance robot travels after single encoder revolution in cm
 // Formula = 2*pi*R/Num. Num = 46, Number of encoder revolution for a full 360 wheel turn. R = 5.25[cm], Wheel radius.
 float step_distance = 0.824668;
-int16_t encoder_counter = 1;
+uint16_t encoder_counter = 1;
 int16_t current_state;
 int16_t last_state;
 
@@ -77,6 +78,8 @@ void setup() {
 	// Setup MPU6050
 	byte status = mpu.begin();
 	while (status != 0) { } // stop everything if could not connect to MPU6050
+	delay(1000);
+	mpu.calcOffsets();
 	
 }
 
@@ -123,23 +126,26 @@ void loop() {
 			digitalWrite(BACKWARD_LM,LOW);
 	  
 			delay(300);
-			
-			//Drive robot forward
-			analogWrite(ENABLE_RM,rmotor_pwm);
-			digitalWrite(FORWARD_RM,HIGH);
-			digitalWrite(BACKWARD_RM,LOW);
-			
-			analogWrite(ENABLE_LM,lmotor_pwm);
-			digitalWrite(FORWARD_LM,HIGH);
-			digitalWrite(BACKWARD_LM,LOW);
           
         }
 		
-        while (sonar_distance >= 70|| sonar_distance == 0) {
+        while (sonar_distance >= 56|| sonar_distance == 0) {
+			
+		//Drive robot forward
+		analogWrite(ENABLE_RM,rmotor_pwm);
+		digitalWrite(FORWARD_RM,HIGH);
+		digitalWrite(BACKWARD_RM,LOW);
+		
+		analogWrite(ENABLE_LM,lmotor_pwm);
+		digitalWrite(FORWARD_LM,HIGH);
+		digitalWrite(BACKWARD_LM,LOW);
+		
       
 		//Collect sensor data
         sonar_distance = sonar_sensor.Distance();
         ir_distance = ir_sensor.distance();
+		mpu.update();
+		Serial.println(mpu.getAngleZ());
 
         //Save sensor data
         if (sonar_index < 1000 && ir_index < 1000) {
@@ -152,7 +158,7 @@ void loop() {
         //If obstacle present, stop robot and send sensor data to PC
           
         if (sonar_distance <= 70 && sonar_distance != 0) {
-            
+			digitalWrite(4,HIGH);
 			// Stop robot
 			digitalWrite(ENABLE_RM,LOW);
             digitalWrite(ENABLE_LM,LOW);
@@ -193,7 +199,6 @@ void loop() {
 			make_turn(pc_msg);
 			
 			delay(5000);
-			digitalWrite(4,HIGH);
 			
 			//Measure distance from obstacle (three times for more accuracy)
 			int16_t sonar_distance_sum = 0;
@@ -221,15 +226,16 @@ void motion_update(){
 	
 	last_state = current_state;
 	
-	//Collect gyroscope data
-	mpu.update();
-	int gz = mpu.getAngleZ();
-	
-	if(gz > 2) { //Robot drags to the right, increase left motor power
-		lmotor_pwm += 10;
-	}
-	if(gz < -2) { //Robot drags to the left, decrease left motor power
-		lmotor_pwm -= 10;
+	//Collect gyroscope data at full wheel turn intervals
+	if(encoder_counter % 46 == 0) {
+		int gz = mpu.getAngleZ();
+		
+		if(gz > 4) { //Robot drags to the right, increase left motor power
+			lmotor_pwm += 10;
+		}
+		if(gz < -4) { //Robot drags to the left, decrease left motor power
+			lmotor_pwm -= 10;
+		}
 	}
 }
 
