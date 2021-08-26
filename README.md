@@ -6,8 +6,8 @@ Stabilization of driving is done by MPU6050 gyroscope, with courtesy of Romain J
 Distance measurements are done using an encoder attached to a wheel.
 
 <h2>Images</h2>
-<img src="https://github.com/AlexKirsh/AutonomousCar/images/IMG_20210826_180854.jpg" width="40%">
-<img src="https://github.com/AlexKirsh/AutonomousCar/images/IMG_20210826_180908.jpg" width="40%">
+<img src="https://github.com/AlexKirsh/AutonomousCar/blob/master/images/IMG_20210826_180854.jpg?raw=true" width="40%">
+<img src="https://github.com/AlexKirsh/AutonomousCar/blob/master/images/IMG_20210826_180908.jpg?raw=true" width="40%">
 
 <h2>Documentation</h2>
 Documentation of physical connections is available
